@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         '/': (context) => const Homepage(),
-        '/editAcc': (context) => const EditAccount(data: 'Hello from HomePage',),
+        '/editAcc': (context) => const EditAccount(),
       },
       initialRoute: '/',
     );
@@ -113,7 +113,7 @@ class Homepage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // method-----------------------
-                Navigator.pushNamed(context, '/editAcc');
+                Navigator.pushNamed(context, '/editAcc', arguments: "Hello from homepage");
                 print('Profile Button Clicked!');
               },
               style: ElevatedButton.styleFrom(
@@ -191,9 +191,9 @@ class Homepage extends StatelessWidget {
 
 
 class EditAccount extends StatelessWidget {
-  final String data;
+  //final String data = ModalRoute.of(context)!.settings.arguments as String;
   
-  const EditAccount({Key? key, required this.data}) : super(key: key);
+  const EditAccount({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -252,7 +252,7 @@ class EditAccount extends StatelessWidget {
                 ),
               ),
             ),
-            Text(data, style: TextStyle(color: Colors.blue),)
+            Text(ModalRoute.of(context)!.settings.arguments as String, style: TextStyle(color: Colors.blue),)
           ],
         ),
       ),
